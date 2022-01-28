@@ -1,0 +1,16 @@
+{
+    "name": "offth/bluebeard",
+    "description": "A book-shop made in PHP.",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nicolas-lepinay",
+            "email": "nicolas.lepinay@outlook.com"
+        }
+    ],
+    "require": {}
+}
