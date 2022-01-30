@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 28 jan. 2022 à 19:14
+-- Généré le : Dim 30 jan. 2022 à 16:52
 -- Version du serveur :  8.0.21
 -- Version de PHP : 7.3.21
 
@@ -103,6 +103,34 @@ INSERT INTO `collection` (`id_collection`, `name`, `image`, `slug`) VALUES
 (4, 'Romance', 'romance.jpg', 'romance'),
 (5, 'Bande-dessinée', 'bande-dessinee.jpg', 'bande-dessinee'),
 (6, 'Jeunesse', 'jeunesse.jpg', 'jeunesse');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `user_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `story_rating` int NOT NULL,
+  `price_rating` int NOT NULL,
+  `quality_rating` int NOT NULL,
+  `summary` varchar(100) NOT NULL,
+  `review` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `user_id` (`user_id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `feedback`
+--
+
+INSERT INTO `feedback` (`user_id`, `product_id`, `story_rating`, `price_rating`, `quality_rating`, `summary`, `review`, `createdAt`) VALUES
+(10, 35, 5, 2, 4, 'Un grand classique incontournable', 'Pour moi, la série des Tintin a un parfum inoubliable de vacances d\'été et d\'enfance, car mes grands-parents paternels, que je ne voyais qu\'à l\'occasion de ces vacances, avaient la collection complète. Mes préférés j\'en ai beaucoup comme le trésor de Rackham le Rouge, et le précédent, le secret de la Licorne. Histoire de pirates et de trésors, forcément, une grande aventure ! Celle ci commence vraiment ici puisque Tintin, le Capitaine Haddock, les Dupondt et le Professeur Tournesol (nouveau venu dans le monde d\'Hergé) partent à la recherche du fameux trésor.Les péripéties sont nombreuses et l\'humour est omniprésent grâce à l\'arrivée du Professeur Tournesol. Sourd comme un pot, il est toujours à côté de la plaque ce qui a le don d\'agacer l\'impétueux Capitaine Haddock qui tente vainement de se faire entendre. Leurs conversations sont irrésistibles et hilarantes. Autre point qui, pour moi, fait que cet album est le véritable commencement des célèbres aventures du célèbre reporter et de son inestimable ami est que c\'est dans ce tome que ce dernier, le capitaine Haddock, rachète le château de Moulinsart qui a jadis appartenu à ses ancêtres.', '2022-01-30 17:16:08'),
+(8, 35, 4, 4, 5, 'Un beau livre bien relié', 'Agréable à relire, toute ma jeunesse est là, c\'est de l\'action mais pas violente. De plus cette bonne odeur de papier neuf et d\'encre.', '2022-01-30 17:19:41');
 
 -- --------------------------------------------------------
 

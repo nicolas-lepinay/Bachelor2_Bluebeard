@@ -51,6 +51,21 @@ Class Product extends Model
     }
 
     /*
+    * Méthode renvoyant un array d'une ou plusieurs feedback en fonction de la valeur d'une colonne (key) :
+    * @return array;
+    */
+    public function findFeedback($key, $value)
+    {
+        $data[$key] = $value;
+        $query = "SELECT * FROM feedback WHERE {$key} = :{$key}";
+        $result = $this->read($query, $data);
+        if(is_array($result)) {
+            return $result; // array d'objets (stdClass)
+        }
+        return false;
+    }
+
+    /*
     * Méthodes pour la partie Admin :
     */
     public function admin_product_delete($id_product)

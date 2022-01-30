@@ -114,103 +114,146 @@ if(isset($data['wishlist'])) {
                         <!-- Start Single Tab Content -->
                         <div class="pro__tab_label tab-pane fade" id="nav-review" role="tabpanel">
                             <div class="review__attribute">
-                                <h1>Avis de nos lecteurs</h1>
-                                <h2>James K.</h2>
-                                <div class="review__ratings__type d-flex">
-                                    <div class="review-ratings">
-                                        <div class="rating-summary d-flex">
-                                            <span>Histoire</span>
-                                            <ul class="rating d-flex">
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
+                                <?php if(isset($data['feedback']) && !empty($data['feedback'])) : ?>
+                                    <h1>Avis de nos lecteurs</h1>
+                                    <?php foreach($data['feedback'] as $feedback) : ?>
+                                        <h2><i><?= $feedback->summary ?></i></h2>
+                                        <p><?= $feedback->review ?></p>
+                                        <div class="review__ratings__type d-flex">
+                                            <div class="review-ratings">
+                                                <div class="rating-summary d-flex">
+                                                    <span>Histoire</span>
+                                                    <ul class="rating d-flex">
+                                                        <?php 
+                                                            // Etoiles pleines (répétées autant de fois que la note) :
+                                                            echo str_repeat('<li><i class="zmdi zmdi-star"></i></li>', $feedback->story_rating);
+                                                            // Etoiles vides, répétées autant de fois que (5 - la note) :
+                                                            echo str_repeat('<li class="off"><i class="zmdi zmdi-star"></i></li>', (5 - $feedback->story_rating));
+                                                        ?>
+                                                    </ul>
+                                                </div>
 
-                                        <div class="rating-summary d-flex">
-                                            <span>Prix</span>
-                                            <ul class="rating d-flex">
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
+                                                <div class="rating-summary d-flex">
+                                                    <span>Prix</span>
+                                                    <ul class="rating d-flex">
+                                                    <?php 
+                                                        // Etoiles pleines (répétées autant de fois que la note) :
+                                                        echo str_repeat('<li><i class="zmdi zmdi-star"></i></li>', $feedback->price_rating);
+                                                        // Etoiles vides, répétées autant de fois que (5 - la note) :
+                                                        echo str_repeat('<li class="off"><i class="zmdi zmdi-star"></i></li>', (5 - $feedback->price_rating));
+                                                    ?>
+                                                    </ul>
+                                                </div>
+                                                <div class="rating-summary d-flex">
+                                                    <span>Qualité</span>
+                                                    <ul class="rating d-flex">
+                                                    <?php 
+                                                        // Etoiles pleines (répétées autant de fois que la note) :
+                                                        echo str_repeat('<li><i class="zmdi zmdi-star"></i></li>', $feedback->quality_rating);
+                                                        // Etoiles vides, répétées autant de fois que (5 - la note) :
+                                                        echo str_repeat('<li class="off"><i class="zmdi zmdi-star"></i></li>', (5 - $feedback->quality_rating));
+                                                    ?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="review-content">
+                                                <p>Publié par <?= $feedback->username ?></p>
+                                                <p>Le <?= date_format(date_create_from_format('Y-m-d H:i:s', $feedback->createdAt), 'jS F Y') ?></p>
+                                            </div>
                                         </div>
-                                        <div class="rating-summary d-flex">
-                                            <span>Qualité</span>
-                                            <ul class="rating d-flex">
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="review-content">
-                                        <p>James K.</p>
-                                        <p>Publié par James K.</p>
-                                        <p>Le 01/02/2022</p>
-                                    </div>
-                                </div>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <h2>Aucun avis n'a été publié.</h2>
+                                <?php endif; ?>
                             </div>
-                            <div class="review-fieldset">
-                                <h3><?= "Laisser un avis pour <b><i>" . $data['product']->title . "</i></b> de " . $data['product']->author ?></h3>
-                                <div class="review-field-ratings">
-                                    <div class="product-review-table">
-                                        <div class="review-field-rating d-flex">
-                                            <span>Histoire</span>
-                                            <ul class="rating d-flex">
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
+
+                            <?php if(isset($data['user'])) : ?>
+                                <form class="review-fieldset" method="POST" action="<?= ROOT . 'product/feedback/' . $data['product']->slug ?>">
+                                    <h3><?= "Laisser un avis pour <b><i>" . $data['product']->title . "</i></b> de " . $data['product']->author ?></h3>
+                                    <div class="review-field-ratings">
+                                        <div class="product-review-table">
+                                            <div class="review-field-rating d-flex">
+                                                <span>Histoire</span>
+                                                <div class="stars__rating">
+                                                    <input type="radio" name="rating-story" id="star5-story" value="5" >
+                                                    <label for="star5-story"></label>
+
+                                                    <input type="radio" name="rating-story" id="star4-story" value="4" >
+                                                    <label for="star4-story"></label>
+
+                                                    <input type="radio" name="rating-story" id="star3-story" value="3" checked >
+                                                    <label for="star3-story"></label>
+
+                                                    <input type="radio" name="rating-story" id="star2-story" value="2" >
+                                                    <label for="star2-story"></label>
+
+                                                    <input type="radio" name="rating-story" id="star1-story" value="1" >
+                                                    <label for="star1-story"></label>
+                                                </div>
+                                            </div>
+
+                                            <div class="review-field-rating d-flex">
+                                                <span>Prix</span>
+                                                <div class="stars__rating">
+                                                    <input type="radio" name="rating-price" id="star5-price" value="5" >
+                                                    <label for="star5-price"></label>
+
+                                                    <input type="radio" name="rating-price" id="star4-price" value="4" >
+                                                    <label for="star4-price"></label>
+
+                                                    <input type="radio" name="rating-price" id="star3-price" value="3" checked >
+                                                    <label for="star3-price"></label>
+
+                                                    <input type="radio" name="rating-price" id="star2-price" value="2" >
+                                                    <label for="star2-price"></label>
+
+                                                    <input type="radio" name="rating-price" id="star1-price" value="2" >
+                                                    <label for="star1-price"></label>
+                                                </div>
+                                            </div>
+                                            <div class="review-field-rating d-flex">
+                                                <span>Qualité</span>
+                                                <div class="stars__rating">
+                                                    <input type="radio" name="rating-quality" id="star5-quality" value="5" >
+                                                    <label for="star5-quality"></label>
+
+                                                    <input type="radio" name="rating-quality" id="star4-quality" value="4" >
+                                                    <label for="star4-quality"></label>
+
+                                                    <input type="radio" name="rating-quality" id="star3-quality" value="3" checked >
+                                                    <label for="star3-quality"></label>
+
+                                                    <input type="radio" name="rating-quality" id="star2-quality" value="2" >
+                                                    <label for="star2-quality"></label>
+
+                                                    <input type="radio" name="rating-quality" id="star1-quality" value="1" >
+                                                    <label for="star1-quality"></label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="review-field-rating d-flex">
-                                            <span>Prix</span>
-                                            <ul class="rating d-flex">
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
+                                    </div>
+                                    <div class="review_form_field">
+                                        <!-- <div class="input__box">
+                                            <span>Nom d"utilisateur</span>
+                                            <input id="nickname_field" type="text" name="nickname">
+                                        </div> -->
+                                        <div class="input__box">
+                                            <span>Résumé</span>
+                                            <input id="summery_field" type="text" name="summary">
                                         </div>
-                                        <div class="review-field-rating d-flex">
-                                            <span>Qualité</span>
-                                            <ul class="rating d-flex">
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                                <li class="off"><i class="zmdi zmdi-star"></i></li>
-                                            </ul>
+                                        <div class="input__box">
+                                            <span>Avis détaillé</span>
+                                            <textarea name="review"></textarea>
+                                        </div>
+                                        <input type="hidden" name="product_id" value="<?= $data['product']->id_product ?>">
+                                        <div class="review-form-actions">
+                                            <button type="submit">Publier</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="review_form_field">
-                                    <div class="input__box">
-                                        <span>Nom d"utilisateur</span>
-                                        <input id="nickname_field" type="text" name="nickname">
-                                    </div>
-                                    <div class="input__box">
-                                        <span>Résumé</span>
-                                        <input id="summery_field" type="text" name="summery">
-                                    </div>
-                                    <div class="input__box">
-                                        <span>Avis détaillé</span>
-                                        <textarea name="review"></textarea>
-                                    </div>
-                                    <div class="review-form-actions">
-                                        <button>Publier</button>
-                                    </div>
-                                </div>
-                            </div>
+                                </form>
+                            <?php else : ?>
+                                <h2>Connectez-vous pour publier un avis.</h2>
+                            <?php endif; ?>
                         </div>
                         <!-- End Single Tab Content -->
                     </div>

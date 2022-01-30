@@ -29,6 +29,16 @@ Class Product extends Controller
             die;
         }
 
+        $feedback = $product->findFeedback('product_id', $product_data->id_product);
+
+        $user = $this->loadModel("User");
+        if(!empty($feedback)) {
+            foreach($feedback as $review) {
+                $user_data = $user->findOne('id_user', $review->user_id);
+                $review->username = $user_data->username;
+            }
+        }
+
         // Récupère les produits de la même collection que $product_data :
         $collection = $this->loadModel("Collection");
         $collection_data = $collection->findOne('id_collection', $product_data->collection_id);
@@ -36,6 +46,7 @@ Class Product extends Controller
 
         $data['page_title'] = $product_data->title . " | " . $product_data->author;
         $data['product'] = $product_data;
+        $data['feedback'] = $feedback;
         $data['products'] = $products;
 
         $this->view('product', $data);
@@ -71,8 +82,31 @@ Class Product extends Controller
                 }
             }
         }
-
         echo "Vous devez être connecté pour ajouter un produit à vos favoris.";
     }
 
+    /*
+    * Laisser un avis sur le produit :
+    */
+    public function feedback($redirect = 'home') 
+    {
+        if($_SERVER['REQUEST_METHOD'] == "POST") {
+            if(isset($this->user)) {
+                $product = $this->loadModel("Product");
+
+                $data['user_id'] = $this->user->id_user;
+                $data['product_id'] = $_POST['product_id'];
+                $data['story_rating'] = $_POST['rating-story'];
+                $data['price_rating'] = $_POST['rating-price'];
+                $data['quality_rating'] = $_POST['rating-quality'];
+                $data['summary'] = $_POST['summary'];
+                $data['review'] = $_POST['review'];
+
+                $query = "INSERT INTO feedback (user_id, product_id, story_rating, price_rating, quality_rating, summary, review) VALUES (:user_id, :product_id, :story_rating, :price_rating, :quality_rating, :summary, :review)";
+                $result = $product->write($query, $data);
+            }
+        }
+        header("Location: " . ROOT . "product/" . $redirect);
+        die;    
+    }
 }
