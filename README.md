@@ -1,5 +1,6 @@
 # Bachelor2_Bluebeard
-A bookshop e-commerce website made in PHP8 and MySQL.\
+𝑩𝒍𝒖𝒆𝒃𝒆𝒂𝒓𝒅 : a bookshop e-commerce website made in PHP8 and MySQL.\
+👉 𝐅𝐞𝐚𝐭𝐮𝐫𝐞𝐬:
 
 ◆ Signup, login.\
 ◆ Cart and checkout.\
@@ -8,7 +9,9 @@ A bookshop e-commerce website made in PHP8 and MySQL.\
 ◆ Account page.\
 ◆ Search bar.\
 ◆ Feedback and ratings.\
-◆ Admin dashboard.\\
+◆ Admin dashboard.
+
+👉 𝐒𝐜𝐫𝐞𝐞𝐧𝐬𝐡𝐨𝐭𝐬:
 
 ![homepage](https://user-images.githubusercontent.com/87578863/151936690-8b7c8ee9-e597-469a-8e9b-96b112f7347a.png)
 ![productpage](https://user-images.githubusercontent.com/87578863/151936701-c46e0864-745f-416c-8f89-8051aaa67ccd.png)
