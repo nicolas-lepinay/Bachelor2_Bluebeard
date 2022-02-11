@@ -70,7 +70,7 @@ Class Profile extends Controller
                 }
             }
         }
-        return $data;
+        return array_reverse($data); // Pour les avoir de la plus récente à la plus ancienne
     }
 
     public function displayWishlist()
@@ -89,10 +89,6 @@ Class Profile extends Controller
         return array_reverse($result); // Pour les avoir du plus récent au plus ancien
     }
 
-
-
-
-
     public function displayAddresses()
     {
         $address = $this->loadModel('Address');
@@ -102,5 +98,7 @@ Class Profile extends Controller
         }
         return array();
     }
+
+    
 
 }

@@ -60,6 +60,7 @@
 <script src="<?= ASSETS . THEME ?>js/vendor/bootstrap.min.js"></script>
 <script src="<?= ASSETS . THEME ?>js/plugins.js"></script>
 <script src="<?= ASSETS . THEME ?>js/active.js"></script>
+<script src="<?= ASSETS . THEME ?>js/edit.js"></script>
 
 <style>*{scrollbar-width: thin;}</style>
 

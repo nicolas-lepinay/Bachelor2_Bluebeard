@@ -201,13 +201,25 @@ Class Checkout extends Controller
 
             // Si l'insertion échoue :
             if(!$result) {
-                echo "ERREUR - AUCUN RESULT !";
-                die;
                 $this->error = "Une erreur est survenue lors de la création des détails de votre commande. <br>";
                 $_SESSION['error'] = $this->error;
                 header("Location: " . ROOT . "checkout");
                 die;
             }
+        }
+        // * (5) Mise à jour du stock des produits :
+        $product_model = $this->loadModel('Product');
+        foreach($_SESSION['cart'] as $product) { 
+            unset($data);
+
+            $product_data = $product_model->findOne('id_product', $product->id_product);
+            $old_stock = (int)$product_data->stock;
+            $new_stock = $old_stock - (int)$product->quantity;
+
+            $data['stock'] = $new_stock;
+            $data['id_product'] = $product->id_product;
+            $query = "UPDATE product SET stock = :stock WHERE id_product = :id_product";
+            $result = $order->write($query, $data);
         }
         return $order_id;
     }

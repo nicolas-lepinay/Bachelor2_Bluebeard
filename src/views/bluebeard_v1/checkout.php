@@ -76,26 +76,26 @@
                         <div class="customar__field">
                             <div class="input_box">
                                 <label>Titre de l'adresse</label>
-                                <input type="text" name="billing-title" placeholder="Mon adresse" value="<?= array_reverse($data['addresses'])[0]->title ?? "" ?>">
+                                <input type="text" name="billing-title" placeholder="Mon adresse" value="<?= $data['addresses'][0]->title ?? "" ?>">
                             </div>
                             <div class="margin_between">
                                 <div class="input_box space_between">
                                     <label>Prénom <span>*</span></label>
-                                    <input type="text" name="billing-first_name" placeholder="Barbe" value="<?= array_reverse($data['addresses'])[0]->first_name ?? "" ?>" required>
+                                    <input type="text" name="billing-first_name" placeholder="Barbe" value="<?= $data['addresses'][0]->first_name ?? "" ?>" required>
                                 </div>
                                 <div class="input_box space_between">
                                     <label>Nom <span>*</span></label>
-                                    <input type="text" name="billing-last_name" placeholder="Bleue" value="<?= array_reverse($data['addresses'])[0]->last_name ?? "" ?>" required>
+                                    <input type="text" name="billing-last_name" placeholder="Bleue" value="<?= $data['addresses'][0]->last_name ?? "" ?>" required>
                                 </div>
                             </div>
                             <div class="input_box">
                                 <label>Adresse <span>*</span></label>
-                                <input type="text" name="billing-street" placeholder="6, Chemin de l'Orée du Bois, Paris" value="<?= array_reverse($data['addresses'])[0]->street ?? "" ?>" required>
+                                <input type="text" name="billing-street" placeholder="6, Chemin de l'Orée du Bois, Paris" value="<?= $data['addresses'][0]->street ?? "" ?>" required>
                             </div>
                             <div class="margin_between">
                                 <div class="input_box space_between">
                                     <label>Code postal <span>*</span></label>
-                                    <input type="text" name="billing-zipcode" placeholder="75000" value="<?= array_reverse($data['addresses'])[0]->zipcode ?? "" ?>" required>
+                                    <input type="text" name="billing-zipcode" placeholder="75000" value="<?= $data['addresses'][0]->zipcode ?? "" ?>" required>
                                 </div>
                                 <div class="input_box space_between">
                                     <label>Pays <span>*</span></label>

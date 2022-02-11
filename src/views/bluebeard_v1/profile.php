@@ -37,6 +37,7 @@
                             <?php endif; ?>
                             <li><a href="<?= ROOT . 'profile/mes-commandes' ?>">Mes commandes</a></li>
                             <li><a href="<?= ROOT . 'profile/mes-favoris' ?>">Mes favoris</a></li>
+                            <!-- <li><a href="<?= ROOT . 'settings' ?>">Paramètres du compte</a></li> -->
                             <li><a href="<?= ROOT ?>logout">Déconnexion</a></li>
                         </ul>
                     </aside>
