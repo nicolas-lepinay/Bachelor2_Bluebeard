@@ -15,6 +15,9 @@
 👉 𝐒𝐜𝐫𝐞𝐞𝐧𝐬𝐡𝐨𝐭𝐬:
 
 ![FireShot Capture 027 - BLUEBEARD - Accueil - localhost](https://user-images.githubusercontent.com/87578863/153615640-aa0f2015-5858-4157-8178-3b1ae3b851da.png)
-![productpage](https://user-images.githubusercontent.com/87578863/151936701-c46e0864-745f-416c-8f89-8051aaa67ccd.png)
-![carouselpage](https://user-images.githubusercontent.com/87578863/151936707-519cb70e-4cd8-4dd2-9a85-3569d4e970a6.png)
-![cataloguepage](https://user-images.githubusercontent.com/87578863/151936718-933158fe-50c0-4b5d-b60c-67feffbfbf6f.png)
+
+![FireShot Capture 028 - Frankenstein (Illustré) - Mary Shelley - localhost](https://user-images.githubusercontent.com/87578863/153618277-01ee7cee-43c7-403b-926a-a89f0b93661b.png)
+
+![FireShot Capture 030 - BLUEBEARD - Mon panier - localhost](https://user-images.githubusercontent.com/87578863/153618293-3ef84528-d960-43e5-bd2d-4a335f7157c7.png)
+
+![FireShot Capture 031 - BLUEBEARD - Commander - localhost](https://user-images.githubusercontent.com/87578863/153618304-e1b7a54d-96ae-4b06-9036-3882167be80a.png)
